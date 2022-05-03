@@ -19,7 +19,7 @@ public class ConferenceReader {
 
     public List<Conference> readFromFile(String path) {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-            int conferenceAmount = Integer.parseInt(reader.readLine());
+            int conferenceAmount = readConferenceAmount(reader.readLine());
 
             if (conferenceAmount < 1 || conferenceAmount > 20) {
                 throw new IllegalStateException("Conference amount should be between 1 and 20");
@@ -54,6 +54,14 @@ public class ConferenceReader {
         return conferences;
     }
 
+    private int readConferenceAmount(String line) {
+        try {
+            return Integer.parseInt(line);
+        } catch (NumberFormatException e) {
+            throw new IllegalStateException("File should contains conference amount in 1st line");
+        }
+    }
+
     private boolean isConferenceNameValid(String name) {
         return LIGHTNING_CONFERENCE_NAME_PATTERN.matcher(name).matches() || REGULAR_CONFERENCE_NAME_PATTERN.matcher(name).matches();
     }
@@ -67,10 +75,4 @@ public class ConferenceReader {
                 .trim();
         return Integer.parseInt(duration);
     }
-
-//    private String extractTitle(String name) {
-//        return name.replaceAll(FIVE_MINUTES_DURATION_CONFERENCE_LABEL, "")
-//                .replaceAll("[0-9]{2}min", "")
-//                .trim();
-//    }
 }

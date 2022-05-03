@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class AgendaScheduler {
 
-
     public List<Track> schedule(List<Conference> conferences) {
         conferences.sort(Comparator.comparing(Conference::getDuration, Collections.reverseOrder()));
         List<Track> tracks = List.of(
