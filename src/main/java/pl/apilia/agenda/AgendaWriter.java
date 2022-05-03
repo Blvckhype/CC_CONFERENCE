@@ -16,12 +16,11 @@ public class AgendaWriter {
     private static final String LUNCH_TIME = "12:00PM LUNCH\n";
     private static final String TRACK_1 = "TRACK 1:\n";
     private static final String TRACK_2 = "TRACK 2:\n";
-
     private static final String NETWORKING_EVENT = "Networking event\n";
     private static final String TIME_PATTERN = "hh:mma";
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_PATTERN);
 
-    public String write(List<Track> tracks) {
+    public String writeContentToString(List<Track> tracks) {
         StringBuilder builder = new StringBuilder();
 
         for (Track track : tracks) {
